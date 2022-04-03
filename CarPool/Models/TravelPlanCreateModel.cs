@@ -38,8 +38,8 @@ namespace CarPool.Models
             }
 
             var isCarBusy = dbContext.Set<TravelPlan>().Any(t => t.CarId == CarId &&
-                                                            ((t.StartDate >= StartDate && t.StartDate <= EndDate)
-                                                            || (t.EndDate >= StartDate && t.EndDate <= EndDate)));
+                                                            !((t.StartDate < StartDate && t.EndDate < StartDate)
+                                                            || (t.StartDate > EndDate && t.EndDate > EndDate)));
 
             if (isCarBusy)
             {
